@@ -1,4 +1,4 @@
-### cloud-miner-amminer
+# cloud-miner-amminer
 Welcome! I'm Amelia and this is a repository for the Fall 2023 session of professor Feng's Internet, Web & Cloud Systems course. We meet Tuesdays and Thursdays from 2:00 PM to 3:50 PM in a somewhat dingy but charming old movie theater.
 
 ## Description
