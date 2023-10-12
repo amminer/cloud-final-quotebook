@@ -1,0 +1,23 @@
+Throughout the course, we will be incrementally constructing a scalable web application for famous quotes.
+The sequence the homeworks will follow is below:
+
+Homework #2:
+  Python/Flask MVP web application using sqlite3
+    create and read operations
+    update and delete as stretch goals.
+Homework #3:
+  Containerized version of Homework #2 uploaded to Docker Hub
+Homework #4:
+  Adds Cloud Datastore database backend deployed on Cloud Run
+
+The application should support the submission and viewership of entries that are provided via a web form.
+Submission of entries should support fields that can hold attributes typically related to the application
+and are stored in a backend database. Examples include:
+
+  * Quote
+  * Person the quote is attributed to
+  * Date of the quote (e.g. year, month, day)
+  * Source type for the quote (e.g. book, speech, essay, movie, song)
+  * Source of the quote (e.g. the Constitution, Barbie the Movie, "I Have a Dream", "Imagine")
+  * Quote rating
+

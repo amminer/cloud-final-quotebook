@@ -1,0 +1,10 @@
+Overall functionality
+
+Code documentation (such as Docstrings, comments)
+
+Code readability and modularity
+
+git repository activity (commits, commit messages, tags)
+
+Instructions followed properly including naming and submission of code
+

@@ -1,0 +1,20 @@
+Follows an MVP pattern and supports the following routes/views:
+
+Route that implements the default landing page with links to other routes
+Route that allows one to view all entries previously submitted
+Route for creating/inserting a new entries via an HTML form
+Have a backend implementation that has:
+
+An abstract model class (e.g. Model.py) that supports individual fields with varying data types to support the application and that is documented via Docstrings including parameters and return values with their types
+A derived data model class (e.g. model_sqlite3.py) that supports creation and reading of entries via a sqlite3 database
+Can be run successfully via
+
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+python app.py
+app.py listens on port 5000 when called directly from Python
+requirements.txt contains all packages required to run program
+Contain an abstract data model class that serves as the base class for specific model instantiations
+  (sqlite3, Cloud Datastore, etc)
+You may derive your application out of the supplied code in the course repository at https://github.com/wu4f/cs430-src
