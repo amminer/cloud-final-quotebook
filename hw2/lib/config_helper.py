@@ -16,9 +16,11 @@ class ConfigParser():
     def read_in_from_file(self, file_path):
         with open(file_path, 'r') as raw_file:
             self.raw_content = ''.join(raw_file.readlines())
-        self.json = json.loads(self.raw_content)
+        self.json_dict = json.loads(self.raw_content)
 
-        self.model = self.json['model']
+        for key, val in self.json_dict.items():
+            self.__dict__[key] = val
+        #self.model = self.json['model']
 
 
 config = ConfigParser()
