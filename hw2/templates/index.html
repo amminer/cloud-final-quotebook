@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Quotebook</h2>
+
+    <h3>Quotes</h3>
+    {% for quote in quotes %}
+        <p class=quote>
+	    {{ quote.quote }}<br>
+        TODO on {{ quote.when }}<br>
+        {{ quote.who }}
+        </p>
+    {% endfor %}
+
+{% endblock %}
