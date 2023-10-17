@@ -5,9 +5,14 @@
     <h3>Quotes</h3>
     {% for quote in quotes %}
         <p class=quote>
-	    {{ quote.quote }}<br>
-        TODO on {{ quote.when }}<br>
-        {{ quote.who }}
+	    "{{ quote.quote }}"<br>
+            &emsp; ~ {{ quote.who }}
+        {%- if quote.when -%}
+        , {{ quote.when }}<br>
+        {%- endif -%}
+        {%- if not quote.when -%}
+        <br>
+        {%- endif -%}
         </p>
     {% endfor %}
 

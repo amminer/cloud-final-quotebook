@@ -3,8 +3,8 @@ TODO docs
 """
 
 class Quote():
-    def __init__(self, quote: str, who: str, when: str,
-                 where: str, how: str, context: str) -> None:
+    def __init__(self, quote: str, who: str, when: str=None,
+                 where: str=None, how: str=None, context: str=None) -> None:
         """
         :param quote: str, the contents of the quote
             required
@@ -24,4 +24,6 @@ class Quote():
         """
         self.quote = quote
         self.who = who
+        if when is not None:
+            self.when = when
         # TODO parse optional params
