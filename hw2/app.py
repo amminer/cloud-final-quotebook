@@ -5,7 +5,7 @@ REQUIREMENTS:
  * Follows an MVP pattern and supports the following routes/views:
   - Route that implements the default landing page with links to other routes
   - Route that allows one to view all entries previously submitted
-  - Route for creating/inserting a new entries via an HTML form
+  - Route for creating/inserting new entries via an HTML form
 
  * Have a backend implementation that has:
   - An abstract model class (e.g. Model.py) that supports

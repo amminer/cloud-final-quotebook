@@ -2,6 +2,9 @@
 TODO docs
 """
 
+from datetime import datetime
+from lib.config_helper import config
+
 class Quote():
     def __init__(self, quote: str, who: str, when: str=None,
                  where: str=None, how: str=None, context: str=None) -> None:
@@ -26,4 +29,19 @@ class Quote():
         self.who = who
         if when is not None:
             self.when = when
-        # TODO parse optional params
+        if where is not None:
+            self.where = where
+        if how is not None:
+            self.how = how
+        if context is not None:
+            self.context = context
+
+    def __str__(self) -> str:
+        ret = self.quote + ' - ' + self.who + ' (' + datetime.strftime(self.when, config.date_format) + ')'
+        if hasattr(self, 'where'):
+            ret += ' [' + self.where + ']'
+        if hasattr(self, 'how'):
+            ret += ' {' + self.how + '}'
+        if hasattr(self, 'context'):
+            ret += ' (' + self.context + ')'
+        return ret
