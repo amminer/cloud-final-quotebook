@@ -1,5 +1,5 @@
 """
-TODO docs
+implements the Model interface for sqlite3
 """
 
 
@@ -13,7 +13,7 @@ class Model(BaseModel):
 
 
     def __init__(self):
-        self.connection = sqlite3.connect('quotes.db')
+        self.connection = sqlite3.connect('quotes.db') # will create if not exists
         cur = self.connection.cursor()
         try:
             cur.execute("select count(rowid) from quotes")

@@ -1,5 +1,5 @@
 """
-TODO docs
+Quote class represents a quote and its metadata for easy handling
 """
 
 from datetime import datetime

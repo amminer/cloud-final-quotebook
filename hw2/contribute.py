@@ -1,6 +1,7 @@
 """
-TODO docs
+form for contributing a quote to the backend
 """
+
 
 from flask import render_template, redirect, request, url_for
 from flask.views import MethodView
@@ -11,9 +12,12 @@ from lib.date_helper import string_to_date
 
 
 class Contribute(MethodView):
+
+
     def get(self):
         return render_template('contribute.html')
     
+
     def post(self):
         model = get_model()
         quote = Quote(

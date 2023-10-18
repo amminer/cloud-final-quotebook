@@ -1,3 +1,9 @@
+"""
+helper functions for translating between datetime objects and strings
+standardized on the format YYYY-MM-DD
+"""
+
+
 from datetime import datetime
 
 

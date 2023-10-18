@@ -15,6 +15,7 @@ REQUIREMENTS:
    + creation and reading of entries via a sqlite3 database
 """
 
+
 import flask
 from flask.views import MethodView
 from index import Index
@@ -25,23 +26,35 @@ from contribute import Contribute
 APP = flask.Flask(__name__)
 
 
+"""
+landing page with links to other routes; linked to by header at top of layout
+"""
 APP.add_url_rule(
     rule='/',
     view_func=Index.as_view('index'),
     methods=['GET']
 )
 
+
+"""
+allows users to submit new quotes
+"""
 APP.add_url_rule(
     rule='/contribute',
     view_func=Contribute.as_view('contribute'),
     methods=['GET','POST']
 )
 
+
+"""
+allows users to view all existing quotes
+"""
 APP.add_url_rule(
     rule='/history',
     view_func=History.as_view('history'),
     methods=['GET']
 )
+
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=5000, debug=True)

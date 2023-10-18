@@ -1,6 +1,7 @@
 """
-TODO docs
+displays quotes already stored in the backend to the user
 """
+
 
 from flask import render_template
 from flask.views import MethodView
@@ -9,6 +10,8 @@ from lib.quote import Quote
 
 
 class History(MethodView):
+    
+
     def get(self):
         model = get_model()
         quotes = model.select()

@@ -1,12 +1,16 @@
 """
-TODO docs
+reads in the configuration information for the app,
+which is stored in a JSON file, /config.json by default
+
+client code should import the config object from this module
+and read its properties to determine the configuration of the app
 """
 
 
 import json
 
 
-class ConfigParser():
+class _ConfigParser():
     
 
     def __init__(self, config_file_path='config.json'):
@@ -23,4 +27,4 @@ class ConfigParser():
         #self.model = self.json['model']
 
 
-config = ConfigParser()
+config = _ConfigParser()

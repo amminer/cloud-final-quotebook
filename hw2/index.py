@@ -1,6 +1,7 @@
 """
-TODO docs
+landing page with links to other routes
 """
+
 
 from flask import render_template
 from flask.views import MethodView
@@ -10,6 +11,8 @@ from lib.quote import Quote
 
 
 class Index(MethodView):
+
+
     def get(self):
         routes = {
             'history': '/history',
