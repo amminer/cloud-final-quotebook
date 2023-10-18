@@ -18,21 +18,30 @@ REQUIREMENTS:
 import flask
 from flask.views import MethodView
 from index import Index
-#from contribute import Contribute # TODO
+from history import History
+from contribute import Contribute
 
-app = flask.Flask(__name__)
 
-app.add_url_rule(
+APP = flask.Flask(__name__)
+
+
+APP.add_url_rule(
     rule='/',
     view_func=Index.as_view('index'),
     methods=['GET']
 )
 
-#app.add_url_rule( # TODO
-    #endpoint='/contribute',
-    #view_func=Contribute.as_view('contribute'),
-    #methods=['GET','POST']
-#)
+APP.add_url_rule(
+    rule='/contribute',
+    view_func=Contribute.as_view('contribute'),
+    methods=['GET','POST']
+)
+
+APP.add_url_rule(
+    rule='/history',
+    view_func=History.as_view('history'),
+    methods=['GET']
+)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    APP.run(host='0.0.0.0', port=8000, debug=True)

@@ -21,5 +21,5 @@ class Model(BaseModel):
         ] # TODO
 
 
-    def insert(self):
+    def insert(self, quote: Quote):
         return None # TODO

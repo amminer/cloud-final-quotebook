@@ -4,12 +4,15 @@ TODO docs
 
 from flask import render_template
 from flask.views import MethodView
-from data_model import get_model
 from lib.quote import Quote
+#from app import ROUTES # TODO work around circular import
+# for now do it manually
 
 
 class Index(MethodView):
     def get(self):
-        model = get_model()
-        quotes = model.select()
-        return render_template('index.html', quotes=quotes)
+        routes = {
+            'history': '/history',
+            'contribute': '/contribute'
+        }
+        return render_template('index.html', other_routes=routes)
