@@ -6,7 +6,7 @@ from datetime import datetime
 from lib.date_helper import date_to_string, string_to_date
 
 class Quote():
-    def __init__(self, quote: str, who: str, when: str=None,
+    def __init__(self, quote: str, who: str, when: datetime=None,
                  where: str=None, how: str=None, context: str=None) -> None:
         """
         :param quote: str, the contents of the quote
@@ -14,10 +14,9 @@ class Quote():
         :param who: str, the person who said the quote
             required
 
-        :param when: str, when the quote was said
+        :param when: datetime, when the quote was said
             optional
-            for now this is just an unvalidated string -
-            TODO accept datestrings with various levels of granularity
+            only day, month, year are used
         :param where: str, where the quote was said
             optional
         :param how: str, medium of the quote (e.g. spoken word, blog post, etc.)
