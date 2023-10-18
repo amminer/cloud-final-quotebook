@@ -4,10 +4,10 @@ TODO docs
 
 from flask import render_template, redirect, request, url_for
 from flask.views import MethodView
-from lib.config_helper import config
 from datetime import datetime
 from data_model import get_model
 from lib.quote import Quote
+from lib.date_helper import string_to_date
 
 
 class Contribute(MethodView):
@@ -19,7 +19,7 @@ class Contribute(MethodView):
         quote = Quote(
             quote=request.form['quote'],
             who=request.form['who'],
-            when=datetime.strptime(request.form['when'], config.date_format),
+            when=string_to_date(request.form['when']),
             where=request.form['where'],
             how=request.form['how'],
             context=request.form['context']

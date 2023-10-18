@@ -3,7 +3,7 @@ TODO docs
 """
 
 from datetime import datetime
-from lib.config_helper import config
+from lib.date_helper import date_to_string, string_to_date
 
 class Quote():
     def __init__(self, quote: str, who: str, when: str=None,
@@ -37,7 +37,7 @@ class Quote():
             self.context = context
 
     def __str__(self) -> str:
-        ret = self.quote + ' - ' + self.who + ' (' + datetime.strftime(self.when, config.date_format) + ')'
+        ret = self.quote + ' - ' + self.who + ' (' + date_to_string(self.when) + ')'
         if hasattr(self, 'where'):
             ret += ' [' + self.where + ']'
         if hasattr(self, 'how'):
