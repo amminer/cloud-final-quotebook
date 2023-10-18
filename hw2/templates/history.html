@@ -2,7 +2,7 @@
 {% block content %}
     <h2>Quote History</h2>
     {% for quote in quotes %}
-        <p class=quote>
+        <p class=quote> <!-- TODO quote deserves its own html template-->
 	    "{{ quote.quote }}"<br>
             &emsp; ~ {{ quote.who }}
         {%- if quote.when -%}
