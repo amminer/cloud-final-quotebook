@@ -17,7 +17,6 @@ REQUIREMENTS:
 
 
 import flask
-from flask.views import MethodView
 from index import Index
 from history import History
 from contribute import Contribute

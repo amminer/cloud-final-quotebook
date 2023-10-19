@@ -4,13 +4,16 @@
     {% for quote in quotes %}
         <p class=quote> <!-- TODO quote deserves its own html template-->
 	    "{{ quote.quote }}"<br>
-            &emsp; ~ {{ quote.who }}
-        {%- if quote.when -%}
-        , {{ quote.when }}<br>
-        {%- endif -%}
-        {%- if not quote.when -%}
-        <br>
-        {%- endif -%}
+            &emsp; ~ {{ quote.who }}, {{ quote.when }}<br>
+        {% if quote.where %}
+            &emsp;at/in {{ quote.where }}<br>
+        {% endif %}
+        {% if quote.how %}
+            &emsp;via {{ quote.how }}<br>
+        {% endif %}
+        {% if quote.context %}
+            &emsp; ({{ quote.context }})<br>
+        {% endif %}
         </p>
     {% endfor %}
 
