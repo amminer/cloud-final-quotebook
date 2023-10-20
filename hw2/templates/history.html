@@ -3,8 +3,9 @@
     <h2>Quote History</h2>
     {% for quote in quotes %}
         <p class=quote> <!-- TODO quote deserves its own html template-->
-	    "{{ quote.quote }}"<br>
-            &emsp; ~ {{ quote.who }}, {{ quote.when }}<br>
+	    <p class=quote-body>"{{ quote.quote }}"<br></p>
+        <p class="quote-meta">
+        &emsp; ~ {{ quote.who }}{% if quote.when%}, {{ quote.when }} {% endif %}<br>
         {% if quote.where %}
             &emsp;at/in {{ quote.where }}<br>
         {% endif %}
@@ -14,6 +15,7 @@
         {% if quote.context %}
             &emsp; ({{ quote.context }})<br>
         {% endif %}
+        </p>
         </p>
     {% endfor %}
 

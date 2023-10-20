@@ -20,10 +20,11 @@ class Contribute(MethodView):
 
     def post(self):
         model = get_model()
+        when = string_to_date(request.form['when'])
         quote = Quote(
             quote=request.form['quote'],
             who=request.form['who'],
-            when=string_to_date(request.form['when']),
+            when=when,
             where=request.form['where'],
             how=request.form['how'],
             context=request.form['context']

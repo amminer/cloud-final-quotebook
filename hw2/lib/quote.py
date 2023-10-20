@@ -26,21 +26,19 @@ class Quote():
         """
         self.quote = quote
         self.who = who
-        if when is not None:
-            self.when = when
-        if where is not None:
-            self.where = where
-        if how is not None:
-            self.how = how
-        if context is not None:
-            self.context = context
+        self.when = when
+        self.where = where
+        self.how = how
+        self.context = context
 
     def __str__(self) -> str:
-        ret = self.quote + ' - ' + self.who + ' (' + date_to_string(self.when) + ')'
-        if hasattr(self, 'where'):
+        ret = self.quote + ' - ' + self.who
+        if self.when is not None:
+            ret += ' (' + date_to_string(self.when) + ')'
+        if self.where is not None:
             ret += ' [' + self.where + ']'
-        if hasattr(self, 'how'):
+        if self.how is not None:
             ret += ' {' + self.how + '}'
-        if hasattr(self, 'context'):
+        if self.context is not None:
             ret += ' (' + self.context + ')'
         return ret
