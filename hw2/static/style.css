@@ -39,6 +39,7 @@ form {
     margin:.1em auto;
     width: 504px;
     border: 1px;
+    padding-left: 1em;
 }
 
 input[type=date], input[type=text], input[type=textarea], textarea
