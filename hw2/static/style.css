@@ -39,9 +39,6 @@ form {
     margin:.1em auto;
     width: 504px;
     border: 1px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
 }
 
 input[type=date], input[type=text], input[type=textarea], textarea
@@ -50,8 +47,9 @@ input[type=date], input[type=text], input[type=textarea], textarea
     padding: .5em;
     font-size: 12px;
     vertical-align: top;
-    width: 200px;
-    max-width: 80%;
+    width: 90%;
+    max-width: 90%;
+    min-width: 90%;
     color: #777;
     background-color: var(--parchment);
 }
