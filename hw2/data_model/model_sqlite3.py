@@ -13,6 +13,10 @@ class Model(BaseModel):
 
 
     def __init__(self):
+        """
+        create the sqlite database file or open the existing file,
+        create the quotes table if it does not exist
+        """
         self.connection = sqlite3.connect('quotes.db') # will create if not exists
         cur = self.connection.cursor()
         try:
@@ -34,6 +38,10 @@ class Model(BaseModel):
 
 
     def select(self):
+        """
+        Get all entries from the database
+        :return: List of Quote objects populated from the database rows
+        """
         cur = self.connection.cursor()
         raw_quotes = cur.execute('SELECT * FROM quotes').fetchall()
         quotes = [Quote(*raw_quote) for raw_quote in raw_quotes]
@@ -42,6 +50,11 @@ class Model(BaseModel):
 
 
     def insert(self, quote: Quote):
+        """
+        Insert a new entry into the database
+        :param quote: Quote object to insert
+        :return: None
+        """
         cur = self.connection.cursor()
         insert_query = f'''
             insert into quotes (quote, who, _when, _where, how, context)
