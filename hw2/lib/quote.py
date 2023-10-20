@@ -6,8 +6,8 @@ from datetime import datetime
 from lib.date_helper import date_to_string, string_to_date
 
 class Quote():
-    def __init__(self, quote: str, who: str, when: datetime=None,
-                 where: str=None, how: str=None, context: str=None) -> None:
+    def __init__(self, quote: str, who: str, when: datetime='',
+                 where: str='', how: str='', context: str='') -> None:
         """
         :param quote: str, the contents of the quote
             required
@@ -26,19 +26,19 @@ class Quote():
         """
         self.quote = quote
         self.who = who
-        self.when = when
+        self.when = string_to_date(when)
         self.where = where
         self.how = how
         self.context = context
 
     def __str__(self) -> str:
         ret = self.quote + ' - ' + self.who
-        if self.when is not None:
+        if self.when:
             ret += ' (' + date_to_string(self.when) + ')'
-        if self.where is not None:
+        if self.where:
             ret += ' [' + self.where + ']'
-        if self.how is not None:
+        if self.how:
             ret += ' {' + self.how + '}'
-        if self.context is not None:
+        if self.context:
             ret += ' (' + self.context + ')'
         return ret

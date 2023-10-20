@@ -5,7 +5,7 @@
         <p class=quote> <!-- TODO quote deserves its own html template-->
 	    <p class=quote-body>"{{ quote.quote }}"<br></p>
         <p class="quote-meta">
-        &emsp; ~ {{ quote.who }}{% if quote.when%}, {{ quote.when }} {% endif %}<br>
+        &emsp; ~ {{ quote.who }}{% if quote.when%}, {{ date_to_string(quote.when) }} {% endif %}<br>
         {% if quote.where %}
             &emsp;at/in {{ quote.where }}<br>
         {% endif %}
