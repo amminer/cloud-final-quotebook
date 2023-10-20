@@ -54,6 +54,17 @@ input[type=date], input[type=text], input[type=textarea], textarea
     background-color: var(--parchment);
 }
 
+input[type=submit] {
+    background: url("./images/quill.png") no-repeat scroll 0 0 transparent;
+    background-size: contain;
+    background-position: 85%;
+    width: 220px;
+    height: 64px;
+    text-align: start;
+    font-size: medium;
+    padding: 1em 2em;
+}
+
 .heading { font-weight: bold; }
 
 /* history */
