@@ -19,7 +19,12 @@ class Contribute(MethodView):
     
 
     def post(self):
-        model = get_model()
+        quote = request.form['quote']
+        who = request.form['who']
+        if not quote or not who:
+            return render_template('contribute.html', error='Please fill out all required fields')
+        when = request.form['when']
+        where = request.form['where']
         when = string_to_date(request.form['when'])
         quote = Quote(
             quote=request.form['quote'],
@@ -29,6 +34,7 @@ class Contribute(MethodView):
             how=request.form['how'],
             context=request.form['context']
         )
+        model = get_model()
         print(f'INFO: inserting {quote}', flush=True) # TODO logging?
         model.insert(quote)
         return redirect(url_for('history'))

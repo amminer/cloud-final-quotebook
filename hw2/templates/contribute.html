@@ -1,17 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
     <h2>Contribute A Quote</h2>
+    <p>required fields are marked with a *</p>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
     <form action="{{ url_for('contribute') }}" method=post>
-        <p class="heading"> Quote:* <br/>
+        <p class="heading"> Quote:*
         <textarea rows=5 cols=50 name=quote></textarea></p>
         <p class="heading"> Who said it:* <input type=text name=who></p>
         <p class="heading"> When it was said: <input type=date name=when></p>
         <p class="heading"> Where it was said: <input type=text name=where></p>
         <p class="heading"> Vector of dissemination: <input type=text name=how></p>
         <br/>
-        <p class="heading">More context information:<br/>
+        <p class="heading">Context:
         <textarea rows=5 cols=50 name=context></textarea></p>
         <p><input type=submit value=Contribute></p>
     </form>
-    <p>* = required</p>
 {% endblock %}

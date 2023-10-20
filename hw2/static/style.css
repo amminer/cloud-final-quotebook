@@ -1,24 +1,64 @@
-* {
-    --parchment: #fff4e4 !important;
-}
+/* shared */
+
+* { --parchment: #fff4e4 !important; }
 
 @font-face {
     font-family: Playfair;
     src: url(static/Playfair.ttf);
 }
 
-body       {
-    font-family: Playfair; font-size: 20px;
-    color: #111; background-color: var(--parchment);
+body {
+    font-family: Playfair;
+    font-size: 20px;
+    color: #111;
+    background-color: var(--parchment);
 }
 
-a, h1, h2  { font-family: Playfair; color: #000; }
+a, h1, h2 {
+    font-family: Playfair;
+    color: #000;
+}
 
-form       { margin:.1em auto; padding:.1em; width: 504px; border: 1px }
+.page      {
+    margin:.1em auto;
+    padding:.1em;
+    width: 504px;
+    border: 1px solid #888;
+    padding: 1em 2em;
+}
 
-.heading  { font-weight: bold; }
+.error {
+    color: #f24;
+    font-weight: bold;
+}
 
-.page      { margin:.1em auto; padding:.1em; width: 504px;  }
+
+/* contribute */
+
+form {
+    margin:.1em auto;
+    width: 504px;
+    border: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+input[type=date], input[type=text], input[type=textarea], textarea
+{
+    margin: .5em 0;
+    padding: .5em;
+    font-size: 12px;
+    vertical-align: top;
+    width: 200px;
+    max-width: 80%;
+    color: #777;
+    background-color: var(--parchment);
+}
+
+.heading { font-weight: bold; }
+
+/* history */
 
 .quote     {
     margin-bottom: 2em;
@@ -36,10 +76,4 @@ form       { margin:.1em auto; padding:.1em; width: 504px; border: 1px }
     font-size: 1.1em;
     color: #333;
     padding-left: 2em;
-}
-
-input[type=date], input[type=text], input[type=textarea], textarea
-{
-    margin: .5em 0; padding: .5em; font-size: 12px; width: 200px;
-    color: #777; background-color: var(--parchment) !important;
 }
