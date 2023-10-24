@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Quote History</h2>
+    {% for quote in quotes %}
+        <p class=quote> <!-- TODO quote deserves its own html template-->
+	    <p class=quote-body>"{{ quote.quote }}"<br></p>
+        <p class="quote-meta">
+        &emsp; ~ {{ quote.who }}{% if quote.when%}, {{ date_to_string(quote.when) }} {% endif %}<br>
+        {% if quote.where %}
+            &emsp;at/in {{ quote.where }}<br>
+        {% endif %}
+        {% if quote.how %}
+            &emsp;via {{ quote.how }}<br>
+        {% endif %}
+        {% if quote.context %}
+            &emsp; ({{ quote.context }})<br>
+        {% endif %}
+        </p>
+        </p>
+    {% endfor %}
+
+{% endblock %}

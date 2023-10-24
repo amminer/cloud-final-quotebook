@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Landing Page</h2>
+    {% for route in other_routes.keys() %}
+        <a class=route href="{{ other_routes[route] }}">
+	        {{ route }}
+        </a><br/>
+    {% endfor %}
+
+{% endblock %}
