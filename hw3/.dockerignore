@@ -1,0 +1,8 @@
+.venv/
+*.db
+launch.json
+*.xcf
+.gitignore
+Dockerfile.*
+*.pdf
+docs/

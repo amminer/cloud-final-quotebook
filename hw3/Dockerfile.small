@@ -1,0 +1,13 @@
+FROM python:3.10-alpine
+
+LABEL maintainer="amminer@pdx.edu"
+
+COPY . /app
+
+RUN pip install -r app/requirements.txt --no-cache-dir && \
+    rm -rf $(find / -name apk)
+    
+
+ENTRYPOINT ["python3"]
+
+CMD ["app/app.py"]
