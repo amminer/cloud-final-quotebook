@@ -32,6 +32,10 @@ a, h1, h2 {
     font-weight: bold;
 }
 
+.image {
+  width: 100%;
+}
+
 
 /* contribute */
 
