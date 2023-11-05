@@ -3,7 +3,9 @@ In order to use this module, the app must be run in an environment containing a
 service account key file. Set the env var GOOGLE_APPLICATION_CREDENTIALS to
 the path to the key file. If you're running in a container, you can copy the
 file into the container's filesystem per-instance (-v containerpath:localpath
-in docker)
+in docker). In Google Cloud Run, use a gcloud secret - see
+https://medium.com/google-cloud/mount-a-file-as-a-volume-in-cloud-run-facc74c02cc6
+https://cloud.google.com/sdk/gcloud/reference/run/deploy
 """
 from data_model.Model import BaseModel
 from lib.quote import Quote
