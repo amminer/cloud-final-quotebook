@@ -6,7 +6,7 @@ from datetime import datetime
 from lib.date_helper import date_to_string, string_to_date
 
 class Quote():
-    def __init__(self, quote: str, who: str, when: datetime='',
+    def __init__(self, quote: str, who: str, when: datetime or str='',
                  where: str='', how: str='', context: str='') -> None:
         """
         :param quote: str, the contents of the quote
@@ -16,7 +16,8 @@ class Quote():
 
         :param when: datetime, when the quote was said
             optional
-            only day, month, year are used
+            only day, month, year are used. In memory, this should
+            always be a datetime object.
         :param where: str, where the quote was said
             optional
         :param how: str, medium of the quote (e.g. spoken word, blog post, etc.)
@@ -26,7 +27,12 @@ class Quote():
         """
         self.quote = quote
         self.who = who
-        self.when = string_to_date(when)
+        if isinstance(when, str) and when != '':
+            self.when = string_to_date(when)
+        elif isinstance(when, datetime):
+            self.when = when
+        else:
+            self.when = None
         self.where = where
         self.how = how
         self.context = context

@@ -32,3 +32,4 @@ class BaseModel(ABC):
         :return: None
         """
         pass
+

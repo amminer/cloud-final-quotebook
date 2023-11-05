@@ -19,6 +19,8 @@ def catch_invalid_datestring_errors(func):
             return func(*args, **kwargs)
         except (ValueError, TypeError) as e:
             print('WARNING: invalid datestring', flush=True) # TODO logging?
+            if 'datestring' in locals():
+                print('datestring:', datestring, flush=True)
             return None
     return wrapper
 
