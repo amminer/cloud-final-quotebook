@@ -1,0 +1,88 @@
+/* shared */
+
+* { --parchment: #fff4e4 !important; }
+
+@font-face {
+    font-family: Playfair;
+    src: url(static/Playfair.ttf);
+}
+
+body {
+    font-family: Playfair;
+    font-size: 20px;
+    color: #111;
+    background-color: var(--parchment);
+}
+
+a, h1, h2 {
+    font-family: Playfair;
+    color: #000;
+}
+
+.page      {
+    margin:.1em auto;
+    padding:.1em;
+    width: 504px;
+    border: 1px solid #888;
+    padding: 1em 2em;
+}
+
+.error {
+    color: #f24;
+    font-weight: bold;
+}
+
+
+/* contribute */
+
+form {
+    margin:.1em auto;
+    width: 504px;
+    border: 1px;
+    padding-left: 1em;
+}
+
+input[type=date], input[type=text], input[type=textarea], textarea
+{
+    margin: .5em 0;
+    padding: .5em;
+    font-size: 12px;
+    vertical-align: top;
+    width: 90%;
+    max-width: 90%;
+    min-width: 90%;
+    color: #777;
+    background-color: var(--parchment);
+}
+
+input[type=submit] {
+    background: url("./images/quill.png") no-repeat scroll 0 0 transparent;
+    background-size: contain;
+    background-position: 85%;
+    padding: 1em 2em;
+    width: 220px;
+    height: 64px;
+    text-align: start;
+    font-size: medium;
+    font-weight: bold;
+}
+
+/* history */
+
+.quote     {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #888;
+}
+
+.quote-body {
+    font-style: italic; font-size: 1.2em;
+    color: #111; margin-bottom: 1em;
+    text-indent: 1em;
+}
+
+.quote-meta {
+    font-size: 1.1em;
+    color: #333;
+    padding-left: 2em;
+}
