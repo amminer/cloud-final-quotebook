@@ -1,3 +1,10 @@
+"""
+In order to use this module, the app must be run in an environment containing a
+service account key file. Set the env var GOOGLE_APPLICATION_CREDENTIALS to
+the path to the key file. If you're running in a container, you can copy the
+file into the container's filesystem per-instance (-v containerpath:localpath
+in docker)
+"""
 from data_model.Model import BaseModel
 from lib.quote import Quote
 from lib.date_helper import date_to_string
