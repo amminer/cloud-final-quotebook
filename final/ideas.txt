@@ -1,0 +1,5 @@
+API integrations (2 minimum, graded on level of functionality leveraged)
+  chatgpt could comment on the veracity of a quote's claimed source
+  we could pull a giphy for each quote (cute)
+  cloud vision could generate an image of the quote's context
+ 
