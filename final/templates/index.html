@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Landing Page</h2>
+    <img class=image src='static/images/monkey.jpeg'
+      alt='A proto-cubist painting of a monkey with a hat and pipe, typing on a typewriter.'>
+    </img>
+    {% for route in other_routes.keys() %}
+        <a class=route href="{{ other_routes[route] }}">
+	        {{ route }}
+        </a><br/>
+    {% endfor %}
+
+{% endblock %}

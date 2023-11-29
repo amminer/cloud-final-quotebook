@@ -1,0 +1,11 @@
+.vscode/
+.venv/
+venv/
+*.db
+launch.json
+*.xcf
+.gitignore
+Dockerfile.*
+*.pdf
+docs/
+__pycache__
