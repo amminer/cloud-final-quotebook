@@ -3,3 +3,41 @@ API integrations (2 minimum, graded on level of functionality leveraged)
   we could pull a giphy for each quote (cute)
   cloud vision could generate an image of the quote's context
  
+~
+ 
+Coming back to this I like the verification idea.
+There could be one integration to determine whether the quote's source is well known,
+and another to comment on the veracity of the quote -
+  "probably legit" as opposed to "definitely real", we are using a language model after all
+
+A "surprise me" button and perhaps a tone selector would be fun.
+
+These two things in tandem could be interesting, since LLMs are capable of hallucinating
+the generative integration might produce a quote of dubious veracity
+which is then called out by the other integration.
+
+I think I'll go with this moving forward. The plan is,
+
+1:
+On form submission the client hits an API with one query to determine
+  * whether the source is well known and
+  * whether the quote is really from that source.
+This will necessitate two new binary fields in the backend database,
+  `verifiable` and
+  `verified`,
+as well as matching fields in the client's representations of a quote.
+
+The prompt will use boilerplate like
+'Format your response to this prompt as JSON with keys "verifiable" and "verified" and bool values.
+Consider the entity "{WHO}". Is sufficient information about this entity present on the internet
+such that a quote claimed to be from them could be verified with reasonable ease and certainty?
+If so, do your best to determine whether this quote of theirs is real: "{QUOTE}".'
+
+The API will have to use a model with the capability to perform real time google searches or similar
+This seems reasonable given recent ChatGPT feature releases.
+If it's not reasonable, I'll have to break it up into at 2 API calls with client side logic
+to determine whether to call the latter. Free extra integration, perhaps.
+
+2:
+Add a "surprise me" button that uses a LLM via API to get back a random "real" quote from history,
+and feed it through the system just like a user submitted quote.
