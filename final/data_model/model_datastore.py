@@ -9,7 +9,6 @@ https://cloud.google.com/sdk/gcloud/reference/run/deploy
 """
 from data_model.Model import BaseModel
 from lib.quote import Quote
-from lib.date_helper import date_to_string
 from google.cloud import datastore
 
 

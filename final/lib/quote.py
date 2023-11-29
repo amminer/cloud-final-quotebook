@@ -36,6 +36,8 @@ class Quote():
         self.where = where
         self.how = how
         self.context = context
+        self.verifiable = False
+        self.verified = False
 
     def __str__(self) -> str:
         ret = self.quote + ' - ' + self.who
@@ -47,4 +49,6 @@ class Quote():
             ret += ' {' + self.how + '}'
         if self.context:
             ret += ' (' + self.context + ')'
+        if self.verifiable:
+            ret += '✅ probably real' if self.verified else '❌ probably fake'
         return ret
