@@ -7,7 +7,7 @@
     src: url(Playfair.ttf);
 }
 
-body {
+body, select, input {
     font-family: Playfair;
     font-size: 20px;
     color: #111;

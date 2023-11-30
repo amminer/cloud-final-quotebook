@@ -6,8 +6,8 @@
         <p class="error"><strong>Error:</strong> {{ error }}</p>
     {% endif %}
     <form action="{{ url_for('contribute') }}" method=post>
-        <p class="heading"> Quote:* <br/>
-        <textarea rows=5 cols=50 name=quote></textarea></p>
+        <p class="heading"> Quote (max. 1000 characters):* <br/>
+        <textarea rows=5 cols=50 name=quote maxlength="1000"></textarea></p>
         <p class="heading"> Who said it:* <br/> <input type=text name=who></p>
         <p class="heading"> When it was said: <br/> <input type=date name=when></p>
         <p class="heading"> Where it was said: <br/> <input type=text name=where></p>

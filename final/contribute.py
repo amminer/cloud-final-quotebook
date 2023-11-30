@@ -25,6 +25,11 @@ class Contribute(MethodView):
             quote = get_random_quote(category if category != 'random' else None)
         else:
             quote_text = request.form['quote']
+            if len(quote_text) > 1000:
+                return render_template('contribute.html',
+                    error='Quote must be 1000 characters or less; '\
+                        + 'you must have edited your local copy of the HTML. Naughty!'
+                )
             who = request.form['who']
             if not quote_text or not who:
                 return render_template('contribute.html',
