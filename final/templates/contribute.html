@@ -14,6 +14,14 @@
         <p class="heading"> Vector of dissemination: <br/> <input type=text name=how></p>
         <p class="heading">Context: <br/>
         <textarea rows=5 cols=50 name=context></textarea></p>
+        <p class="heading"> Feeling lazy? Get a random quote instead:
+            <input type=checkbox name=lazy></p>
+            <select name=category>
+            <option value="random">Any Category</option>
+            {% for category in categories %}
+                <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+            </select> <br/> <br/>
         <input type=submit value="contribute">
     </form>
 {% endblock %}
