@@ -25,7 +25,7 @@ CATEGORIES = [
   'business',
   'car',
   'change',
-  'communications',
+  'communication',  # on API Ninja this one is listed as "communications" which produces an empty response 🤦🏼‍♀️
   'computers',
   'cool',
   'courage',

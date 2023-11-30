@@ -90,3 +90,17 @@ input[type=submit] {
     color: #333;
     padding-left: 2em;
 }
+
+.fact-check {
+    font-size: 0.8em;
+    color: #333;
+}
+
+.fact-check-source {
+    display: block;
+    position: relative;
+    left: 60%;
+    bottom: 2.5em;
+    font-size: 0.7em;
+    color: #444;
+}

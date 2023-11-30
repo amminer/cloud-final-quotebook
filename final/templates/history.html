@@ -2,7 +2,7 @@
 {% block content %}
     <h2>Quote History</h2>
     {% if quotes %}
-    {% for quote in quotes %}
+    {% for quote, lnk in quotes %}
         <p class=quote> <!-- TODO quote deserves its own html template-->
 	    <p class=quote-body>"{{ quote.quote }}"<br></p>
         <p class="quote-meta">
@@ -23,6 +23,9 @@
                 ❓ Unable to verify this quote
             {% endif %}
         </p>
+        <a class="fact-check-source" href="{{ lnk }}" target="_blank">
+            Fact check powered by Wikiquote
+        </a>
         </p>
         </p>
     {% endfor %}
