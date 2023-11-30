@@ -1,74 +1,59 @@
 """
-currently using https://cloud.google.com/vertex-ai/docs/generative-ai/start/quickstarts/quickstart-text
-Remember to set the GOOGLE_APPLICATION_CREDENTIALS env var to the path to the
-service account key JSON file... Also ensure that the following have been run? Need to sort this out for deployment...
-gcloud auth application-default login
-gcloud auth application-default set-quota-project cloud-miner-amminer
+https://www.mediawiki.org/wiki/API:Search
 """
 
-
 import json
-import vertexai
-from vertexai.language_models import TextGenerationModel
+import requests
+import urllib
+
+#from sys import path  # local debug
+#path.append('/home/meelz/school/cloud-miner-amminer/final/')  # local debug
+#from lib.quote import Quote  # local debug
+from lib.exceptions import APIError
 
 
-def verify_quote(quote):
-    """
-    Use google cloud's text analysis API to determine whether a quote is real
-    :param quote: Quote object to verify
-    :return: json {
-      'verifiable': bool, whether there is sufficient information to verify,
-      'verified': bool, whether the quote is deemed real
-    }
-    """
-    project_id = 'cloud-miner-amminer'
-    temperature = 0.1
-    max_output_tokens = 100
-    top_p = 0.95  # default
-    top_k = 40  # default
-    prompt = f'''
-    Format your response to this prompt as JSON with keys "verifiable" and "verified",
-    and boolean values. The response text will be ingested by code and parsed as JSON,
-    so DO NOT format it for human viewing; i.e. the response MUST be valid JSON
-    with no other characters. DO NOT surround the JSON with backticks or other formatting.
-    Consider the entity "{quote.who}".
-    Is sufficient information about this entity present on the internet
-    such that a quote claimed to be from them could be verified with reasonable ease and certainty?
-    If so, do your best to determine whether this quote of theirs is real:
-    "{quote.quote}"
-    Be very strict about this, preferring to mark a quote as not verifiable -
-    if you don't know whether the source of the quote is well-known,
-    assume that they are not.
-    '''
-
-    vertexai.init(project=project_id, location='us-west1')
-    parameters = {
-      'temperature': temperature,
-      'max_output_tokens': max_output_tokens,
-      'top_p': top_p,
-      'top_k': top_k
-    }
-    model = TextGenerationModel.from_pretrained('text-bison')
-    response = model.predict(prompt, **parameters)
-    return json.loads(response.text)
+def get_json_from_wq_api(url):
+  result = requests.get(url)
+  if result.status_code != 200:
+    raise APIError('Wikiquote API', result.status_code)
+  raw_response = result.content.decode('utf-8')
+  return json.loads(raw_response)
 
 
-if __name__ == '__main__':
-  from sys import path
-  path.append('/home/meelz/school/cloud-miner-amminer/final/')
-  from lib.quote import Quote
-  quote = Quote(quote='I am the greatest', who='Muhammad Ali')
-  print(f'expecting true, true:\n{verify_quote(quote)}')
-  quote = Quote(quote='I am pretty good at boxing, I guess', who='Muhammad Ali')
-  print(f'expecting true, false:\n{verify_quote(quote)}')
-  # This next test proved really interesting and caused me to rework my prompt
-  # and, consequentially, the way that the return value is parsed.
-  # When I force the model to strictly return valid JSON (to make my life easy),
-  # it would return true, true, even though this quote is obviously not "real".
-  # However, when I allow the model to return conversational text followed by valid JSON,
-  # it returns false, false, as expected. Very strange and confusing behavior.
-  # Notably, ChatGPT from OpenAI does not behave this way,
-  # but I have no way to use it programmatically for free, so I have to settle for
-  # this Google™️ nonsense.
-  quote = Quote(quote='I am goated with the sauce tbh fam', who='yung saucy goat (very famous rapper)')
-  print(f'expecting false, false:\n{verify_quote(quote)}')
+def quote_source_is_verifiable_wq(who):
+  """
+  Use wikiquote's API to determine whether we can check against a quote against
+  its source's known quotes.
+  Note that there are libraries that provide a higher-level interface for this;
+  In python 3.8 or greater, pip install wikiquote and examine the source code.
+  :param who: str, source to check for
+  :return bool: whether source has a page on wq
+  """
+  url = 'http://en.wikiquote.org/w/api.php' \
+      + '?format=json&action=query&list=search&srlimit=500&srsearch='
+  url += urllib.parse.quote(who)
+  response_json = get_json_from_wq_api(url)
+  results = [entry['title'] for entry in response_json['query']['search']]  # this line is ripped straight from the library code, but it's the only way to parse this JSON...
+
+  # the library does not have the following capability; I may contribute to it at some point
+  original_url = url
+  while 'continue' in response_json.keys():
+    url = original_url + f'&sroffset={response_json["continue"]["sroffset"]}' \
+      + f'&continue={response_json["continue"]["continue"]}'
+    response_json = get_json_from_wq_api(url)
+    results += [entry['title'] for entry in response_json['query']['search']]
+
+  # The API searches titles as well as article content
+  return who in results  # So we have to make sure the hit was for a title
+
+
+def quote_is_legitimate_wq(quote_text, who):
+  # TODO try this one from Henry Ford:
+  # to do for the world more than the world does for you--that is Success
+  # this is an excerpt from a full entry on wq...
+  return False  # TODO
+
+
+#if __name__ == '__main__':  # local debug
+  #quote = Quote(quote='I am the greatest', who='Muhammad Ali')  # local debug
+  #verify_quote_with_wq(quote)  # local debug

@@ -10,6 +10,7 @@ from data_model import get_model
 from lib.quote import Quote
 from lib.date_helper import string_to_date
 from lib.random_quotes_helper import get_random_quote, CATEGORIES
+from lib.quote_verification_helper import quote_source_is_verifiable_wq, quote_is_legitimate_wq
 
 
 class Contribute(MethodView):
@@ -46,6 +47,11 @@ class Contribute(MethodView):
                 how=how,
                 context=context
             )
+        verifiable = quote_source_is_verifiable_wq(quote.who)
+        if verifiable:
+            verified = quote_is_legitimate_wq(quote.quote, quote.who)
+            quote.verifiable = verifiable
+            quote.verified = verified
         model = get_model()
         print(f'INFO: inserting {quote}', flush=True) # TODO logging?
         model.insert(quote)

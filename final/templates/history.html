@@ -16,9 +16,18 @@
         {% if quote.context %}
             &emsp; ({{ quote.context }})<br>
         {% endif %}
+        <p class="fact-check">
+            {% if quote.verifiable %}
+                {{ '✅ This quote is probably real' if quote.verified else '❌ No record of this quote' }}
+            {% else %}
+                ❓ Unable to verify this quote
+            {% endif %}
+        </p>
         </p>
         </p>
     {% endfor %}
+    {% else %}
+        <p>No quotes yet... History is written by the quotebook contributor!</p>
     {% endif %}
 
 {% endblock %}

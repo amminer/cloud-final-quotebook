@@ -7,7 +7,8 @@ from lib.date_helper import date_to_string, string_to_date
 
 class Quote():
     def __init__(self, quote: str, who: str, when: datetime or str='',
-                 where: str='', how: str='', context: str='') -> None:
+                 where: str='', how: str='', context: str='',
+                 verifiable: bool=False, verified:bool = False) -> None:
         """
         :param quote: str, the contents of the quote
             required
@@ -24,6 +25,10 @@ class Quote():
             optional
         :param context: str, piece of media or event in which the quote was said
             optional
+        :param verifiable: bool, whether we can verify the quote's authenticity
+            optional, defaults to False
+        :param verifiable: bool, whether the quote was deemed authentic/legitimate
+            optional, defaults to False
         """
         self.quote = quote
         self.who = who
@@ -36,8 +41,8 @@ class Quote():
         self.where = where
         self.how = how
         self.context = context
-        self.verifiable = False
-        self.verified = False
+        self.verifiable = verifiable
+        self.verified = verified
 
     def __str__(self) -> str:
         ret = self.quote + ' - ' + self.who
@@ -51,4 +56,6 @@ class Quote():
             ret += ' (' + self.context + ')'
         if self.verifiable:
             ret += '✅ probably real' if self.verified else '❌ probably fake'
+        else:
+            ret += '❓ unverifiable'
         return ret

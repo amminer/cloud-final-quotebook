@@ -32,7 +32,7 @@ def from_datastore(entity):
     if isinstance(entity, list):
         entity = entity.pop()
     return [entity['quote'], entity['who'], entity['when'], entity['where'],
-            entity['how'], entity['context']]
+            entity['how'], entity['context'], entity['verifiable'], entity['verified']]
 
 
 class Model(BaseModel):
@@ -68,7 +68,9 @@ class Model(BaseModel):
             'when': quote.when,
             'where': quote.where,
             'how': quote.how,
-            'context': quote.context
+            'context': quote.context,
+            'verifiable': quote.verifiable,
+            'verified': quote.verified
             })
         self.client.put(entity)
         return True
