@@ -1,9 +1,9 @@
 import json
 import requests
 import urllib
+import lxml.html
 from wikiquote.utils import extract_quotes_li
 from wikiquote.langs.en import HEADINGS, WORD_BLOCKLIST
-import lxml.html
 
 from sys import path  # local debug
 path.append('/home/meelz/school/cloud-miner-amminer/final/')  # local debug
