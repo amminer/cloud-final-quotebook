@@ -1,0 +1,38 @@
+i. Introduction, title
+
+1. checkout application code
+
+2. note API key
+
+3. steps to run
+
+  a. install dependencies
+
+  b. gcloud services/apis to enable
+
+  c. apininja account
+
+4. build and deploy container
+
+5. demo app in action - all supported functionality
+
+  a. unverifiable quote
+
+  b. verifiable but unverified
+
+  c. verifiable and verified
+
+  d. random quote
+
+6. source code walkthrough explaining how each feature is implemented
+
+  a. database integration
+
+  b. contribute form & api calls
+
+  c. random quote api
+
+7. git history walkthrough, describe incremental process
+
+8. thanks
+
