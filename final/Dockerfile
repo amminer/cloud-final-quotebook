@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir && echo "this container is configured to listen on port 8080"
 
 ENTRYPOINT ["python3"]
 

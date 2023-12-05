@@ -35,17 +35,19 @@ def quote_source_is_verifiable_wq(who):
   response_json = get_json_from_wq_api(url)
   results = [entry['title'] for entry in response_json['query']['search']]  # this line is ripped straight from the library code, but it's the only way to parse this JSON...
 
+  # TODO check for disambiguation page?
   # the library does not have the following capability; I may contribute to it at some point
   original_url = url
-  while 'continue' in response_json.keys():
+  found = who in results
+  while 'continue' in response_json.keys() and not found:
     url = original_url + f'&sroffset={response_json["continue"]["sroffset"]}' \
       + f'&continue={response_json["continue"]["continue"]}'
     response_json = get_json_from_wq_api(url)
     results += [entry['title'] for entry in response_json['query']['search']]
+    # The API searches titles as well as article content
+    found = who in results
 
-  # The API searches titles as well as article content
-  return who in results  # So we have to make sure the hit was for a title
-  # TODO check for disambiguation page?
+  return found
 
 
 def quote_is_legitimate_wq(quote_text, who):

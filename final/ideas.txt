@@ -47,3 +47,45 @@ and only display veracity when a quote's source is deemed verifiable.
 ** 2: **
 Add a "surprise me" button that uses a LLM via API to get back a random "real" quote from history,
 and feed it through the system just like a user submitted quote.
+
+~
+
+API integrations are at an acceptable level but there is room for improvement.
+
+cd into the final/ dir, then
+```sh
+docker build -t amminer/cloud-final .
+docker push amminer/cloud-final
+```
+^ Done, so all you have to do is:
+
+```sh
+docker run \
+  -p 5000:5000 \
+  -v /home/meelz/school/cloud-miner-amminer/final/cloud-miner-amminer-final-datastore-key.json:/tmp/key.json \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/key.json \
+  -i amminer/cloud-final
+```
+should get things running locally from a container.
+Next step is to get this working on cloud run and record the screencast.
+
+~ 12/2
+
+I set the application's service account up with the secret accessor role,
+created a secret for the api-ninjas key,
+changed the port flask runs on to 8080 to match cloud run's expectation.
+
+I rebuilt the container on gcr, running:
+
+gcloud builds submit --timeout=900 --tag gcr.io/cloud-miner-amminer/cloud-final
+
+and ran:
+
+gcloud run deploy cloud-final --image gcr.io/cloud-miner-amminer/cloud-final \
+  --service-account quotebook-service-account@cloud-miner-amminer.iam.gserviceaccount.com \
+  --update-secrets=API_NINJA_KEY=api-ninjas-key:latest
+
+I chose us-west1 and to allow unauthenticated invocations.
+
+The application is accessible at https://cloud-final-id4ecfzw6q-uw.a.run.app/
+
