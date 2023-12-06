@@ -1,0 +1,91 @@
+API integrations (2 minimum, graded on level of functionality leveraged)
+  chatgpt could comment on the veracity of a quote's claimed source
+  we could pull a giphy for each quote (cute)
+  cloud vision could generate an image of the quote's context
+ 
+~
+ 
+Coming back to this I like the verification idea.
+There could be one integration to determine whether the quote's source is well known,
+and another to comment on the veracity of the quote -
+  "probably legit" as opposed to "definitely real", we are using a language model after all
+
+A "surprise me" button and perhaps a tone selector would be fun.
+
+These two things in tandem could be interesting, since LLMs are capable of hallucinating
+the generative integration might produce a quote of dubious veracity
+which is then called out by the other integration.
+
+I think I'll go with this moving forward. The plan is,
+
+** 1: **
+On form submission the client hits an API with one query to determine
+  * whether the source is well known and
+  * whether the quote is really from that source.
+This will necessitate two new binary fields in the backend database,
+  `verifiable` and
+  `verified`,
+as well as matching fields in the client's representations of a quote.
+
+The prompt will use boilerplate like
+'Format your response to this prompt as JSON with keys "verifiable" and "verified" and bool values.
+Consider the entity "{WHO}". Is sufficient information about this entity present on the internet
+such that a quote claimed to be from them could be verified with reasonable ease and certainty?
+If so, do your best to determine whether this quote of theirs is real: "{QUOTE}".'
+
+The API will have to use a model with the capability to perform real time google searches or similar
+This seems reasonable given recent ChatGPT feature releases.
+If it's not reasonable, I'll have to break it up into at 2 API calls with client side logic
+to determine whether to call the latter. Free extra integration, perhaps.
+
+This will also require that I place a character limit on input to avoid running API charges up,
+which will be easy since a quote is fundamentally fairly short.
+
+I'll use emoji to indicate veracity
+and only display veracity when a quote's source is deemed verifiable.
+
+** 2: **
+Add a "surprise me" button that uses a LLM via API to get back a random "real" quote from history,
+and feed it through the system just like a user submitted quote.
+
+~
+
+API integrations are at an acceptable level but there is room for improvement.
+
+cd into the final/ dir, then
+```sh
+docker build -t amminer/cloud-final .
+docker push amminer/cloud-final
+```
+^ Done, so all you have to do is:
+
+```sh
+docker run \
+  -p 5000:5000 \
+  -v /home/meelz/school/cloud-miner-amminer/final/cloud-miner-amminer-final-datastore-key.json:/tmp/key.json \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/key.json \
+  -i amminer/cloud-final
+```
+should get things running locally from a container.
+Next step is to get this working on cloud run and record the screencast.
+
+~ 12/2
+
+I set the application's service account up with the secret accessor role,
+created a secret for the api-ninjas key,
+changed the port flask runs on to 8080 to match cloud run's expectation.
+
+I rebuilt the container on gcr, running:
+
+gcloud builds submit --timeout=900 --tag gcr.io/cloud-final-presentation/cloud-final
+
+and ran:
+
+gcloud run deploy cloud-final --image gcr.io/cloud-final-presentation/cloud-final \
+  --service-account final-service-account@cloud-final-presentation.iam.gserviceaccount.com \
+  --update-secrets=API_NINJA_KEY=api-ninjas-key:latest
+
+I chose us-west1 and to allow unauthenticated invocations.
+
+The application is accessible at https://cloud-final-id4ecfzw6q-uw.a.run.app/
+

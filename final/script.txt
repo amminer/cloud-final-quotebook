@@ -2,15 +2,21 @@ i. Introduction, title
 
 1. checkout application code
 
-2. note API key
-
 3. steps to run
+
+  a. api-ninja
 
   a. install dependencies
 
-  b. gcloud services/apis to enable
+  b. gcloud services/apis to enable...
 
-  c. apininja account
+    - cloud run enabled by default
+
+    - storage bucket will auto enable when visited
+
+    - secret manager needs to be enabled manually when visited
+
+    - create service account w/ cloud datastore user and secret accessor roles
 
 4. build and deploy container
 
