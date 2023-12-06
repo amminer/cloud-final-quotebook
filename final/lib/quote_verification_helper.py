@@ -59,8 +59,6 @@ def quote_is_legitimate_wq(quote_text, who):
   :param who: str, source of quote
   :return bool: whether quote is present on source's wq page
   """
-  import wikiquote
-  w = wikiquote.quotes('bacon')  # step into this call to see how complicated this can get
   url = 'http://en.wikiquote.org/w/api.php' \
       + '?format=json&action=parse&prop=text|categories&disableeditsection&page='
   url += urllib.parse.quote(who)
@@ -69,7 +67,6 @@ def quote_is_legitimate_wq(quote_text, who):
     raise APIError(f'Wikiquote API: {response_json["error"]["info"]}', -1)
   page_body = response_json['parse']['text']['*']
   response_elements = lxml.html.fromstring(page_body)
-  # Hopefully this still counts as API integration - see above for why I'm not rolling my own quote parser for now
   parsed_quotes = extract_quotes_li(response_elements, float('inf'), HEADINGS, WORD_BLOCKLIST)
   return any([quote_text in quote for quote in parsed_quotes])
 

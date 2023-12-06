@@ -89,3 +89,8 @@ I chose us-west1 and to allow unauthenticated invocations.
 
 The application is accessible at https://cloud-final-id4ecfzw6q-uw.a.run.app/
 
+~ 12/5
+
+multilingual api support and UI?
+
+string similarity -> likelihood metric?
