@@ -14,7 +14,7 @@ amminer@pdx.edu<br>
 321-297-3850
 
 ## Project status
-Under active development :)
+Archival - for illustration of cloud software engineering skills/experience.
 
 ## Priorities
  1. Learn
